@@ -11,7 +11,7 @@ from skimage.io import imread_collection
 import itertools
 
 #your path 
-col_dir = 'E:\Visual\Python\CD-Damage-Detection\img_eve\dam\*.jpg'
+col_dir = '.\img_eve\dam\*.jpg'
 
 #creating a collection with the available images
 col = imread_collection(col_dir)
