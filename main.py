@@ -11,7 +11,7 @@ from skimage.io import imread_collection
 import itertools
 
 #your path 
-col_dir = 'E:\Visual\Python\CD-Damage-Detection\img_eve\ok\*.jpg'
+col_dir = 'E:\Visual\Python\CD-Damage-Detection\img_eve\dam\*.jpg'
 
 #creating a collection with the available images
 col = imread_collection(col_dir)
@@ -22,28 +22,27 @@ for img in col:
     img_list.append(filters.sobel(color.rgb2gray(img)))
 
 
+#for i in range(0, len(img_list)):
+# thresh = filters.threshold_isodata(img_list[i])
+# img_list[0] = img_list[i] > thresh
 
 for i in range(0, len(img_list)):
     img_list[i] = img_list[i] > 0.08
 
+pixel_list = []
 
-#test = img_list[1]
+for img in img_list:
+    whitePixel = 0
+    for d1Pixel in img:
+        for d2Pixel in d1Pixel:
+            if d2Pixel == True:
+                whitePixel += 1
+    pixel_list.append(whitePixel)
+        
 
-#for i in range(0, len(img_list)-1):
-# thresh = filters.threshold_isodata(test)
-# img_list[0] = test > thresh
+print(pixel_list)
 
-# thresh = filters.threshold_li(test)
-# img_list[1] = test > 0.08
 
-# thresh = filters.threshold_triangle(test)
-# img_list[2] = test > thresh
-
-# thresh = filters.threshold_otsu(test)
-# img_list[3] = test > thresh
-
-# half_list = int(len(img_list) /2)
-# list_len = len(img_list)
 
 fig, axes = plt.subplots(nrows = 2, ncols = 2, sharex=True, sharey=True, figsize=(12, 12))
 
@@ -55,8 +54,6 @@ for i, k in zip(range(2), range(0, 4, 2)):
 # for i, k in zip(range(2), range(0, 9, 3)):
 #     for j in range(2):
 #         axes[i, j].imshow(img_list[k+j], cmap='gray')
-
-
 
 
 
